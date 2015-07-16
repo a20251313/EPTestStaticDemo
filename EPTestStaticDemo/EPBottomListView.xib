@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E36b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EPBottomListView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOg-Q6-EKT">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAW-43-EPC">
+                            <rect key="frame" x="160" y="5" width="160" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="部门名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iu3-zM-N4g">
+                            <rect key="frame" x="0.0" y="5" width="160" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="sOn-us-vK0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="UAW-43-EPC" firstAttribute="leading" secondItem="Iu3-zM-N4g" secondAttribute="trailing" id="6Y3-GA-FON"/>
+                        <constraint firstItem="UAW-43-EPC" firstAttribute="top" secondItem="pOg-Q6-EKT" secondAttribute="top" constant="5" id="9GM-N4-oZu"/>
+                        <constraint firstItem="Iu3-zM-N4g" firstAttribute="leading" secondItem="pOg-Q6-EKT" secondAttribute="leading" id="Bm5-xn-ixQ"/>
+                        <constraint firstItem="UAW-43-EPC" firstAttribute="width" secondItem="Iu3-zM-N4g" secondAttribute="width" id="JaA-Ve-5vG"/>
+                        <constraint firstAttribute="bottom" secondItem="Iu3-zM-N4g" secondAttribute="bottom" constant="4" id="RaJ-ZZ-Hle"/>
+                        <constraint firstAttribute="trailing" secondItem="UAW-43-EPC" secondAttribute="trailing" id="Rok-p2-E52"/>
+                        <constraint firstAttribute="bottom" secondItem="UAW-43-EPC" secondAttribute="bottom" constant="4" id="gLd-Gr-fpX"/>
+                        <constraint firstItem="Iu3-zM-N4g" firstAttribute="top" secondItem="pOg-Q6-EKT" secondAttribute="top" constant="5" id="gu2-jb-37S"/>
+                        <constraint firstItem="UAW-43-EPC" firstAttribute="leading" secondItem="Iu3-zM-N4g" secondAttribute="trailing" id="opY-wf-92p"/>
+                        <constraint firstAttribute="height" constant="30" id="qtJ-fk-HS8"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZeS-Mz-OWu">
+                    <rect key="frame" x="0.0" y="31" width="320" height="150"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="iQK-Fj-Af8"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="eLG-3Q-41Y"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lvy-pf-vyb">
+                    <rect key="frame" x="0.0" y="30" width="320" height="44"/>
+                    <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Lo3-u8-VhT"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pOg-Q6-EKT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="677-aT-Vhl"/>
+                <constraint firstItem="Lvy-pf-vyb" firstAttribute="top" secondItem="pOg-Q6-EKT" secondAttribute="bottom" id="OeP-aC-Cji"/>
+                <constraint firstAttribute="trailing" secondItem="Lvy-pf-vyb" secondAttribute="trailing" id="Qbo-1E-THw"/>
+                <constraint firstItem="pOg-Q6-EKT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Vxy-xP-z1W"/>
+                <constraint firstItem="Lvy-pf-vyb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XYy-TM-qNp"/>
+                <constraint firstAttribute="trailing" secondItem="pOg-Q6-EKT" secondAttribute="trailing" id="ZHM-mG-dnx"/>
+                <constraint firstItem="ZeS-Mz-OWu" firstAttribute="top" secondItem="pOg-Q6-EKT" secondAttribute="bottom" constant="1" id="cbe-hK-4eZ"/>
+                <constraint firstAttribute="bottom" secondItem="ZeS-Mz-OWu" secondAttribute="bottom" constant="-1" id="hak-N7-RtG"/>
+                <constraint firstAttribute="trailing" secondItem="ZeS-Mz-OWu" secondAttribute="trailing" id="yWK-NL-vm9"/>
+                <constraint firstItem="ZeS-Mz-OWu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yxu-Bl-z9r"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="m_alphaView" destination="Lvy-pf-vyb" id="iwG-mB-mfK"/>
+                <outlet property="m_headView" destination="pOg-Q6-EKT" id="i3C-rB-XdF"/>
+                <outlet property="m_labelFirstTitle" destination="Iu3-zM-N4g" id="mhn-U2-4Jv"/>
+                <outlet property="m_labelSecondTitle" destination="UAW-43-EPC" id="O7Y-4K-FL7"/>
+                <outlet property="m_tableView" destination="ZeS-Mz-OWu" id="QxS-67-hdz"/>
+            </connections>
+        </view>
+    </objects>
+</document>

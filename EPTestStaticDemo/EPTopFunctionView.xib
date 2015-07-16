@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E36b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EPTopFunctionView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="kkkkkkkkkkkkkkkkkkkk" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6c-O1-pIU">
+                    <rect key="frame" x="15" y="6" width="189" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.36078431372549019" green="0.36078431372549019" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="16666666666" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YtY-UG-R6J">
+                    <rect key="frame" x="212" y="6" width="100" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="HBo-fA-0Mj"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.023529411764705882" green="0.3529411764705882" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="YtY-UG-R6J" firstAttribute="leading" secondItem="o6c-O1-pIU" secondAttribute="trailing" constant="8" id="7oE-u1-8Lq"/>
+                <constraint firstItem="o6c-O1-pIU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="Lkk-fk-7d0"/>
+                <constraint firstAttribute="trailing" secondItem="YtY-UG-R6J" secondAttribute="trailing" constant="8" id="YOc-8T-f21"/>
+                <constraint firstItem="YtY-UG-R6J" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="rnd-e7-zvz"/>
+                <constraint firstItem="o6c-O1-pIU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="vlG-Lw-Ah6"/>
+                <constraint firstAttribute="bottom" secondItem="o6c-O1-pIU" secondAttribute="bottom" constant="7" id="x65-JJ-6wf"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="labelBotttomRight" destination="YtY-UG-R6J" id="BmN-eW-MfY"/>
+                <outlet property="labelLeft" destination="o6c-O1-pIU" id="v7t-dK-6Mf"/>
+            </connections>
+        </view>
+    </objects>
+</document>
