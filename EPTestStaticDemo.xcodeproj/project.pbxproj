@@ -12,8 +12,6 @@
 		0E0FC00F1B56248D00213C80 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0FC00B1B56248D00213C80 /* 2.png */; };
 		0E0FC0101B56248D00213C80 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0FC00C1B56248D00213C80 /* 3.png */; };
 		0E0FC0111B56248D00213C80 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0FC00D1B56248D00213C80 /* 4.png */; };
-		0E0FC0141B574E4F00213C80 /* EPDefineNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FC0131B574E4F00213C80 /* EPDefineNumber.m */; };
-		0E0FC0171B57534100213C80 /* NSNumberFormatter+selfdifine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FC0161B57534100213C80 /* NSNumberFormatter+selfdifine.m */; };
 		0E5701541B53B6FB00E808F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701531B53B6FB00E808F9 /* main.m */; };
 		0E5701571B53B6FB00E808F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701561B53B6FB00E808F9 /* AppDelegate.m */; };
 		0E57015A1B53B6FB00E808F9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701591B53B6FB00E808F9 /* ViewController.m */; };
@@ -54,10 +52,6 @@
 		0E0FC00B1B56248D00213C80 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		0E0FC00C1B56248D00213C80 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		0E0FC00D1B56248D00213C80 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
-		0E0FC0121B574E4F00213C80 /* EPDefineNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPDefineNumber.h; sourceTree = "<group>"; };
-		0E0FC0131B574E4F00213C80 /* EPDefineNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPDefineNumber.m; sourceTree = "<group>"; };
-		0E0FC0151B57534100213C80 /* NSNumberFormatter+selfdifine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+selfdifine.h"; sourceTree = "<group>"; };
-		0E0FC0161B57534100213C80 /* NSNumberFormatter+selfdifine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumberFormatter+selfdifine.m"; sourceTree = "<group>"; };
 		0E57014E1B53B6FB00E808F9 /* EPTestStaticDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EPTestStaticDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E5701521B53B6FB00E808F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E5701531B53B6FB00E808F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -232,10 +226,6 @@
 				0E5701D31B53B91600E808F9 /* BFUtils.m */,
 				0E5701C71B53B8ED00E808F9 /* EPStaticCenterViewController.h */,
 				0E5701C81B53B8ED00E808F9 /* EPStaticCenterViewController.m */,
-				0E0FC0121B574E4F00213C80 /* EPDefineNumber.h */,
-				0E0FC0131B574E4F00213C80 /* EPDefineNumber.m */,
-				0E0FC0151B57534100213C80 /* NSNumberFormatter+selfdifine.h */,
-				0E0FC0161B57534100213C80 /* NSNumberFormatter+selfdifine.m */,
 				0E5701CA1B53B90900E808F9 /* EPConditionView.h */,
 				0E5701CB1B53B90900E808F9 /* EPConditionView.m */,
 				0E5701CC1B53B90900E808F9 /* EPConditionCell.h */,
@@ -487,8 +477,6 @@
 				0E5701E21B53BC1000E808F9 /* EPTopFunctionView.m in Sources */,
 				0EB50E481B54D3430057013E /* EPBottomListView.m in Sources */,
 				0E5701DE1B53BBF000E808F9 /* BAAnimationHelper.m in Sources */,
-				0E0FC0171B57534100213C80 /* NSNumberFormatter+selfdifine.m in Sources */,
-				0E0FC0141B574E4F00213C80 /* EPDefineNumber.m in Sources */,
 				0E5701D81B53BB9100E808F9 /* EPRootViewController.m in Sources */,
 				0E5701D41B53B91600E808F9 /* BFUtils.m in Sources */,
 				0E5701571B53B6FB00E808F9 /* AppDelegate.m in Sources */,

@@ -48,9 +48,9 @@
         flowLayout.minimumInteritemSpacing = 5;
         flowLayout.minimumLineSpacing = 5;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
         
-        m_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 5, size.width, self.frame.size.height-30) collectionViewLayout:flowLayout];
+        m_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, size.width, self.frame.size.height) collectionViewLayout:flowLayout];
         m_collectionView.backgroundColor = [UIColor colorWithRed:242.0 /255.0 green:242.0 /255.0 blue:242.0 /255.0 alpha:1.0];
         self.backgroundColor = [UIColor colorWithRed:242.0 /255.0 green:242.0 /255.0 blue:242.0 /255.0 alpha:1.0];
         m_collectionView.dataSource = self;
@@ -60,6 +60,7 @@
         
         m_collectionView.delegate = self;
         m_collectionView.dataSource = self;
+    
         
     }
     
@@ -81,7 +82,7 @@
     for (int i = 0;i < allTitles.count;i++)
     {
         srandom(time(NULL)+i);
-        long value = random()%10000;
+        long value = random()%50000;
         NSDictionary  *dicMoney = [NSDictionary dictionaryWithObjectsAndKeys:allTitles[i],@(value),nil];
         [m_arrayData addObject:dicMoney];
     }

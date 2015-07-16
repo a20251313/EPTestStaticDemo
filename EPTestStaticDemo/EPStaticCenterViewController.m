@@ -16,7 +16,6 @@
 #import "EPAllEnum.h"
 #import "EPTopFunctionView.h"
 #import "EPBottomListView.h"
-#import "EPDefineNumber.h"
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define kFirstItem  @"firstItem"
 #define kSecondItem  @"secondItem"
@@ -115,6 +114,9 @@ typedef enum
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    UIFont  *myFont = [UIFont fontWithName:@".HelveticaNeueInterface-Regular" size:18];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:myFont,NSFontAttributeName,[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
+    
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.title = @"统计中心";
     [BFUtils setMainThemeColor:[UIColor colorWithRed:55/255.0 green:153/255.0 blue:40/255.0 alpha:1]];
@@ -180,7 +182,7 @@ typedef enum
     if (!m_conditionView)
     {
         CGSize size = [UIScreen mainScreen].bounds.size;
-        m_conditionView = [[EPConditionView alloc] initWithFrame:CGRectMake(0, m_topScrollView.frame.origin.y+m_topScrollView.frame.size.height, size.width, 115) staticType:self.middleType];
+        m_conditionView = [[EPConditionView alloc] initWithFrame:CGRectMake(0, m_topScrollView.frame.origin.y+m_topScrollView.frame.size.height, size.width, 95) staticType:self.middleType];
         [self.view addSubview:m_conditionView];
         m_conditionView.delegate = self;
     }
@@ -284,7 +286,7 @@ typedef enum
         for (int i = 0;i < m_arrayTitle.count;i++)
         {
             srandom(time(NULL)+i);
-            long  value = random()%10000;
+            long  value = random()%50000;
             [m_arrayData addObject:[NSDictionary dictionaryWithObjectsAndKeys:m_arrayTitle[i],[@(value) description], nil]];
         }
         
@@ -337,7 +339,7 @@ typedef enum
     CPDBarOffset = fsep;
     CPDBarInitialX = CPDBarWidth/2;
     CGFloat  fYpoint = 64+30+1;
-    CGFloat  fheight = [UIScreen mainScreen].bounds.size.height-fYpoint-115-180;
+    CGFloat  fheight = [UIScreen mainScreen].bounds.size.height-fYpoint-95-180;
     
     if (m_topScrollView == nil)
     {
@@ -500,8 +502,8 @@ typedef enum
     
     CPTMutableTextStyle *axisTitleStyle = [CPTMutableTextStyle textStyle];
     axisTitleStyle.color = [CPTColor lightGrayColor];
-    axisTitleStyle.fontName = @"Helvetica-Bold";
-    axisTitleStyle.fontSize = 13.0f;
+    axisTitleStyle.fontName = @"Helvetica";
+    axisTitleStyle.fontSize = 11.0f;
 
     // 2 - Get the graph's axis set
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostView.hostedGraph.axisSet;
@@ -518,7 +520,7 @@ typedef enum
     axisSet.yAxis.axisTitle = labelTitle;
     axisSet.yAxis.titleOffset = -self.hostView.frame.size.width-0;
     axisSet.yAxis.titleRotation = M_PI+M_PI_2;
-    axisSet.yAxis.titleLocation = CPTDecimalFromFloat(5000);
+    axisSet.yAxis.titleLocation = CPTDecimalFromFloat(25000);
     axisSet.yAxis.axisLineStyle = axisLineStyle;
     
     
@@ -1129,9 +1131,7 @@ typedef enum
     yAxis.axisLineStyle = axisLineStyle;
     // axisSet.xAxis.axisLineStyle = axisLineStyle;
     yAxis.majorGridLineStyle = gridLineStyle;
-    
-    EPDefineNumber  *format = [[EPDefineNumber alloc] init];
-    [format setPositiveFormat:@"###,###,###"];
+
     yAxis.labelFormatter = nil;
     
     //y 轴：线型设置
@@ -1139,7 +1139,7 @@ typedef enum
     
     //y 轴：不显示小刻度线
     yAxis. minorTickLineStyle = nil ;
-    yAxis. majorIntervalLength = CPTDecimalFromFloat(yMax/4);
+    yAxis. majorIntervalLength = CPTDecimalFromFloat(yMax/5);
     
     
     
@@ -1161,15 +1161,16 @@ typedef enum
 //    [self.hostView.hostedGraph addSublayer:label];
 //    self.hostView.hostedGraph.masksToBorder = NO;
     
-    CGFloat  fsep = (m_topScrollView.frame.size.height-30)/5;
+    CGFloat  fsep = (m_topScrollView.frame.size.height-30)/6;
     CGFloat  fypoint = 0;
-    for (int i = 4; i > 0; i--)
+    for (int i = 5; i > 0; i--)
     {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, fypoint-5, 15, 21)];
         [label setBackgroundColor:[UIColor clearColor]];
         [label setTextColor:[UIColor colorWithRed:193/255.0 green:193/255.0  blue:193/255.0  alpha:1]];
         [label setText:[NSString stringWithFormat:@"%d",i]];
         [label setTextAlignment:NSTextAlignmentRight];
+        [label setFont:[UIFont systemFontOfSize:14]];
         [m_topScrollView addSubview:label];
         fypoint += fsep;
     }

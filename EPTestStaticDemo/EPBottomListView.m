@@ -45,7 +45,7 @@
     for (long i = 0;i < arraySubject.count;i++)
     {
         srandom(time(NULL)+i);
-        long value = random()%10000;
+        long value = random()%50000;
         [m_arrayData addObject:[NSDictionary dictionaryWithObjectsAndKeys:arraySubject[i],@(value), nil]];
     }
     
@@ -214,10 +214,9 @@
     if (m_currentIndex != index)
     {
         m_currentIndex = index;
-        [m_tableView reloadData];
         [self callDelegate];
     }
-    
+    [m_tableView reloadData];
     dispatch_async(dispatch_get_main_queue(), ^{
        
         [scrollView setContentOffset:CGPointMake(0, m_currentIndex*m_cellHeight) animated:YES];
