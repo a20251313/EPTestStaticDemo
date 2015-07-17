@@ -14,7 +14,7 @@
 
 #import "EPConditionView.h"
 #import "EPAllEnum.h"
-#import "EPTopFunctionView.h"
+#import "EPTopBarFunctionView.h"
 #import "EPBottomListView.h"
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define kFirstItem  @"firstItem"
@@ -29,7 +29,7 @@ typedef enum
     EPCenterBarTypeSelectNumber,
 }EPCenterBarType;
 
-@interface EPStaticBarViewController ()<CPTBarPlotDataSource,CPTAxisDelegate,CPTPlotSpaceDelegate,EPConditionViewDelegate,EPBottomListViewDelegate>
+@interface EPStaticBarViewController ()<CPTBarPlotDataSource,CPTAxisDelegate,CPTPlotSpaceDelegate,EPConditionViewDelegate,EPBottomListViewDelegate,EPTopBarFunctionViewDelegate>
 {
     
 
@@ -45,7 +45,7 @@ typedef enum
     EPStaticType     m_bottomType;          //下方条件X轴类型
     CGFloat          m_hostViewHeight;
     
-    EPTopFunctionView       *m_topInfoView;     //上方信息显示view
+    EPTopBarFunctionView       *m_topInfoView;     //上方信息显示view
     
     EPCenterBarType         m_barType;          //当前图表显示形式
     
@@ -64,6 +64,7 @@ typedef enum
     CGFloat                 CPDBarInitialX;     //x初始化值
     
     UISlider                *m_slider;
+    int                     m_currentYear;
 }
 
 
@@ -106,7 +107,7 @@ typedef enum
     [BFUtils setMainThemeColor:[UIColor colorWithRed:55/255.0 green:153/255.0 blue:40/255.0 alpha:1]];
     [self.navigationController.navigationBar setBarTintColor:[BFUtils mainThemeColor]];
     
-    
+    m_currentYear = 2015;
     
     //UIColor  *defaultColor = [UIColor colorWithRed:130/255.0 green:138/255.0 blue:26/255.0 alpha:1];
     //self.navigationController.navigationBar.barTintColor = defaultColor;
@@ -123,12 +124,8 @@ typedef enum
     {
         m_arrayData = [[NSMutableArray alloc] init];
     }
-
     
-    
-
     self.selectItemDic = nil;
-  
     [self reloadData];
     // Do any additional setup after loading the view.
 }
@@ -210,12 +207,12 @@ typedef enum
     self.automaticallyAdjustsScrollViewInsets = NO;
     if (!m_topInfoView)
     {
-        m_topInfoView = [[[NSBundle mainBundle] loadNibNamed:@"EPTopFunctionView" owner:self options:nil] lastObject];
+        m_topInfoView = [[[NSBundle mainBundle] loadNibNamed:@"EPTopBarFunctionView" owner:self options:nil] lastObject];
         
         [self.view addSubview:m_topInfoView];
-        
+        m_topInfoView.delegate = self;
         [m_topInfoView setFrame:CGRectMake(0, fYpoint, size.width, 30)];
-        
+
         // fYpoint += 30;
         UIView  *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 29, size.width, 1)];
         [lineView setBackgroundColor:[UIColor colorWithRed:225/255.0 green:225/255.0 blue:225/255.0 alpha:1]];
@@ -1053,7 +1050,7 @@ typedef enum
         strItem = @"全部";
     }else
     {
-        strItem = [NSString stringWithFormat:@"2015年%@月",strItem];
+        strItem = [NSString stringWithFormat:@"%d年%@月",m_currentYear,strItem];
     }
     NSString *money =  strMainId;/*[self getTotalDataByCondition:self.dicFilter
                                            mainType:m_centerType
@@ -1146,7 +1143,20 @@ typedef enum
     [self.hostView.hostedGraph reloadDataIfNeeded];
 }
 
-
+#pragma mark EPTopBarFunctionViewDelegate
+-(void)topNumberChangeClicked:(BOOL)isUp
+{
+    if (isUp)
+    {
+        m_currentYear++;
+    }else
+    {
+        m_currentYear--;
+    }
+    
+     [self renderHostView];
+    [m_topInfoView refreshWithdicData:[self getTopInfoForShow]];
+}
 
 #pragma mark EPConditionViewDelegate
 -(void)userDidChooseCondition:(NSDictionary*)dicInfo type:(EPStaticType)conditionType

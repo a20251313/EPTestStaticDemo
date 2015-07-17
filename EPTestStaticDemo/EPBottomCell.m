@@ -13,10 +13,15 @@
 - (void)awakeFromNib {
     
     CGSize  size = [UIScreen mainScreen].bounds.size;
-    CGFloat Xpoint = 10;
-    CGFloat fwidth = size.width/2-20;
+    CGFloat Xpoint = 54;
+    CGFloat fwidth = size.width/2-54;
     [self.labelTitle setFrame:CGRectMake(Xpoint, 10, fwidth, 21)];
     [self.labelContent setFrame:CGRectMake(Xpoint+size.width/2, 10, fwidth, 21)];
+    
+    self.labelLevel.layer.masksToBounds = YES;
+    self.labelLevel.layer.cornerRadius =7;
+
+
     // Initialization code
 }
 

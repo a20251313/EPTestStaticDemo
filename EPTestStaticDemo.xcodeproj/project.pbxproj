@@ -28,8 +28,10 @@
 		0E5701D81B53BB9100E808F9 /* EPRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701D71B53BB9100E808F9 /* EPRootViewController.m */; };
 		0E5701DD1B53BBF000E808F9 /* BAColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701DA1B53BBF000E808F9 /* BAColorHelper.m */; };
 		0E5701DE1B53BBF000E808F9 /* BAAnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701DC1B53BBF000E808F9 /* BAAnimationHelper.m */; };
-		0E5701E21B53BC1000E808F9 /* EPTopFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701E01B53BC1000E808F9 /* EPTopFunctionView.m */; };
-		0E5701E31B53BC1000E808F9 /* EPTopFunctionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5701E11B53BC1000E808F9 /* EPTopFunctionView.xib */; };
+		0E5701E21B53BC1000E808F9 /* EPTopBarFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701E01B53BC1000E808F9 /* EPTopBarFunctionView.m */; };
+		0E5701E31B53BC1000E808F9 /* EPTopBarFunctionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5701E11B53BC1000E808F9 /* EPTopBarFunctionView.xib */; };
+		0E88EAE41B58ED1A00A0B2EC /* step_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E88EAE21B58ED1A00A0B2EC /* step_down.png */; };
+		0E88EAE51B58ED1A00A0B2EC /* step_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E88EAE31B58ED1A00A0B2EC /* step_up.png */; };
 		0EB50E481B54D3430057013E /* EPBottomListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB50E471B54D3430057013E /* EPBottomListView.m */; };
 		0EB50E4A1B54D3540057013E /* EPBottomListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB50E491B54D3540057013E /* EPBottomListView.xib */; };
 		0EB50E4E1B54DE0E0057013E /* EPBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB50E4C1B54DE0E0057013E /* EPBottomCell.m */; };
@@ -159,9 +161,11 @@
 		0E5701DA1B53BBF000E808F9 /* BAColorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAColorHelper.m; sourceTree = "<group>"; };
 		0E5701DB1B53BBF000E808F9 /* BAAnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAAnimationHelper.h; sourceTree = "<group>"; };
 		0E5701DC1B53BBF000E808F9 /* BAAnimationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAAnimationHelper.m; sourceTree = "<group>"; };
-		0E5701DF1B53BC1000E808F9 /* EPTopFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPTopFunctionView.h; sourceTree = "<group>"; };
-		0E5701E01B53BC1000E808F9 /* EPTopFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPTopFunctionView.m; sourceTree = "<group>"; };
-		0E5701E11B53BC1000E808F9 /* EPTopFunctionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPTopFunctionView.xib; sourceTree = "<group>"; };
+		0E5701DF1B53BC1000E808F9 /* EPTopBarFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPTopBarFunctionView.h; sourceTree = "<group>"; };
+		0E5701E01B53BC1000E808F9 /* EPTopBarFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPTopBarFunctionView.m; sourceTree = "<group>"; };
+		0E5701E11B53BC1000E808F9 /* EPTopBarFunctionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPTopBarFunctionView.xib; sourceTree = "<group>"; };
+		0E88EAE21B58ED1A00A0B2EC /* step_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step_down.png; sourceTree = "<group>"; };
+		0E88EAE31B58ED1A00A0B2EC /* step_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step_up.png; sourceTree = "<group>"; };
 		0EB50E461B54D3430057013E /* EPBottomListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPBottomListView.h; sourceTree = "<group>"; };
 		0EB50E471B54D3430057013E /* EPBottomListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPBottomListView.m; sourceTree = "<group>"; };
 		0EB50E491B54D3540057013E /* EPBottomListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPBottomListView.xib; sourceTree = "<group>"; };
@@ -210,9 +214,9 @@
 		0E5701501B53B6FB00E808F9 /* EPTestStaticDemo */ = {
 			isa = PBXGroup;
 			children = (
-				0E5701DF1B53BC1000E808F9 /* EPTopFunctionView.h */,
-				0E5701E01B53BC1000E808F9 /* EPTopFunctionView.m */,
-				0E5701E11B53BC1000E808F9 /* EPTopFunctionView.xib */,
+				0E5701DF1B53BC1000E808F9 /* EPTopBarFunctionView.h */,
+				0E5701E01B53BC1000E808F9 /* EPTopBarFunctionView.m */,
+				0E5701E11B53BC1000E808F9 /* EPTopBarFunctionView.xib */,
 				0E5701D91B53BBF000E808F9 /* BAColorHelper.h */,
 				0E5701DA1B53BBF000E808F9 /* BAColorHelper.m */,
 				0E5701DB1B53BBF000E808F9 /* BAAnimationHelper.h */,
@@ -240,6 +244,8 @@
 				0E5701581B53B6FB00E808F9 /* ViewController.h */,
 				0E5701591B53B6FB00E808F9 /* ViewController.m */,
 				0E0FC0081B560C2C00213C80 /* slide_thuma.png */,
+				0E88EAE21B58ED1A00A0B2EC /* step_down.png */,
+				0E88EAE31B58ED1A00A0B2EC /* step_up.png */,
 				0E0FC00A1B56248D00213C80 /* 1.png */,
 				0E0FC00B1B56248D00213C80 /* 2.png */,
 				0E0FC00C1B56248D00213C80 /* 3.png */,
@@ -445,14 +451,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EB50E4A1B54D3540057013E /* EPBottomListView.xib in Resources */,
-				0E5701E31B53BC1000E808F9 /* EPTopFunctionView.xib in Resources */,
+				0E5701E31B53BC1000E808F9 /* EPTopBarFunctionView.xib in Resources */,
 				0E5701D11B53B90900E808F9 /* EPConditionCell.xib in Resources */,
 				0E57015D1B53B6FB00E808F9 /* Main.storyboard in Resources */,
 				0E0FC0111B56248D00213C80 /* 4.png in Resources */,
 				0E5701621B53B6FB00E808F9 /* LaunchScreen.xib in Resources */,
+				0E88EAE51B58ED1A00A0B2EC /* step_up.png in Resources */,
 				0E0FC0091B560C2C00213C80 /* slide_thuma.png in Resources */,
 				0E0FC0101B56248D00213C80 /* 3.png in Resources */,
 				0E0FC00F1B56248D00213C80 /* 2.png in Resources */,
+				0E88EAE41B58ED1A00A0B2EC /* step_down.png in Resources */,
 				0EB50E4F1B54DE0E0057013E /* EPBottomCell.xib in Resources */,
 				0E0FC00E1B56248D00213C80 /* 1.png in Resources */,
 				0E57015F1B53B6FB00E808F9 /* Images.xcassets in Resources */,
@@ -474,7 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E57015A1B53B6FB00E808F9 /* ViewController.m in Sources */,
-				0E5701E21B53BC1000E808F9 /* EPTopFunctionView.m in Sources */,
+				0E5701E21B53BC1000E808F9 /* EPTopBarFunctionView.m in Sources */,
 				0EB50E481B54D3430057013E /* EPBottomListView.m in Sources */,
 				0E5701DE1B53BBF000E808F9 /* BAAnimationHelper.m in Sources */,
 				0E5701D81B53BB9100E808F9 /* EPRootViewController.m in Sources */,

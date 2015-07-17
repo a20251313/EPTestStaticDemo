@@ -76,9 +76,16 @@
     [m_alphaView addSubview:bottomView];
     
     
-    UIView  *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,10, 44)];
-    [leftView setBackgroundColor:[UIColor colorWithRed:242.0/255.0 green:243.0/255.0 blue:243.0 alpha:1]];
-    [m_alphaView addSubview:leftView];
+    
+    
+    UIView  *left1View = [[UIView alloc] initWithFrame:CGRectMake(0, 0,10, 44)];
+    [left1View setBackgroundColor:[UIColor colorWithRed:242.0/255.0 green:243.0/255.0 blue:243.0 alpha:1]];
+    [m_alphaView addSubview:left1View];
+    
+    
+    UIView  *left2View = [[UIView alloc] initWithFrame:CGRectMake(10+34,5,10, 44-10)];
+    [left2View setBackgroundColor:[UIColor colorWithRed:242.0/255.0 green:243.0/255.0 blue:243.0 alpha:1]];
+    [m_alphaView addSubview:left2View];
     
     UIView  *middleView = [[UIView alloc] initWithFrame:CGRectMake(size.width/2, 0,10, 44)];
     [middleView setBackgroundColor:[UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0 alpha:1]];
@@ -126,10 +133,13 @@
         id info  = m_arrayData[indexPath.row];
         cell.labelTitle.text = [[info allValues] firstObject];
         cell.labelContent.text = [BFUtils formatNumber:[[[info allKeys] firstObject] description]];
+        cell.labelLevel.text = [NSString stringWithFormat:@"%d",indexPath.row+1];
+        cell.labelLevel.hidden = NO;
     }else
     {
         cell.labelTitle.text = @"";
         cell.labelContent.text = @"";
+        cell.labelLevel.hidden = YES;
     }
     
     if (indexPath.row == m_currentIndex)
