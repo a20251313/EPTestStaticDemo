@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 郑东尧. All rights reserved.
 //
 
-#import "EPStaticCenterViewController.h"
+#import "EPStaticBarViewController.h"
 #import "CorePlot-CocoaTouch.h"
 #import "BAColorHelper.h"
 #import "BAAnimationHelper.h"
@@ -29,7 +29,7 @@ typedef enum
     EPCenterBarTypeSelectNumber,
 }EPCenterBarType;
 
-@interface EPStaticCenterViewController ()<CPTBarPlotDataSource,CPTAxisDelegate,CPTPlotSpaceDelegate,EPConditionViewDelegate,EPBottomListViewDelegate>
+@interface EPStaticBarViewController ()<CPTBarPlotDataSource,CPTAxisDelegate,CPTPlotSpaceDelegate,EPConditionViewDelegate,EPBottomListViewDelegate>
 {
     
 
@@ -41,38 +41,31 @@ typedef enum
     
     UIScrollView            *m_topScrollView;//维度数据展示
     
-    EPStaticType     m_centerType;
-    EPStaticType     m_bottomType;
+    EPStaticType     m_centerType;          //柱状图X轴类型
+    EPStaticType     m_bottomType;          //下方条件X轴类型
     CGFloat          m_hostViewHeight;
     
-    EPTopFunctionView       *m_topInfoView;
+    EPTopFunctionView       *m_topInfoView;     //上方信息显示view
     
-    NSMutableArray          *m_arrayDimones;    //存贮当前页面显示的维度类型
-    NSInteger               m_currentIndex;     //当前数据在m_arrayDimones的index
+    EPCenterBarType         m_barType;          //当前图表显示形式
     
-    EPCenterBarType         m_barType;
+    NSInteger       m_currentCount;             //用户点击次数
     
-    NSInteger       m_currentCount;
-    
-    NSMutableDictionary            *m_dicReuseLabel;
+    NSMutableDictionary            *m_dicReuseLabel;            //可以复用的label
     
 
     BOOL                    m_bShowZero;    //是否显示木有金额的数据
     NSMutableArray          *m_arrayData;   //需要显示的数据Description 和ID
     
-    EPConditionView         *m_conditionView;
-    EPBottomListView        *m_bottomView;
-    CGFloat                 CPDBarWidth;
-    CGFloat                 CPDBarOffset;
-    CGFloat                 CPDBarInitialX;
+    EPConditionView         *m_conditionView;   //中间滑块的view
+    EPBottomListView        *m_bottomView;      //底部列表view
+    CGFloat                 CPDBarWidth;        //柱状图宽度
+    CGFloat                 CPDBarOffset;       //柱状图偏移量
+    CGFloat                 CPDBarInitialX;     //x初始化值
     
     UISlider                *m_slider;
 }
 
-
-//  CGFloat                 CPDBarWidth = 26;
-//CGFloat                 CPDBarOffset = 10;
-//CGFloat                 CPDBarInitialX = 15;
 
 @property (nonatomic, strong) CPTGraphHostingView *hostView;
 @property (nonatomic, strong) CPTBarPlot *plot;
@@ -84,7 +77,7 @@ typedef enum
 @property(nonatomic)NSDictionary       *selectItemDic;//当前点击选中的X选项
 @end
 
-@implementation EPStaticCenterViewController
+@implementation EPStaticBarViewController
 
 @synthesize plotSpace;
 @synthesize hostView;
@@ -94,19 +87,10 @@ typedef enum
 @synthesize selectItemDic;
 @synthesize middleType;
 
-
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     m_barType = EPCenterBarTypeDefault;
-    if (!m_arrayDimones)
-    {
-        m_arrayDimones = [[NSMutableArray alloc] init];
-        [m_arrayDimones addObject:@(EPStaticTypePerson)];
-    }
     
     m_centerType = EPStaticTypeTime;
     m_bottomType = EPStaticTypeSubject;
@@ -177,6 +161,10 @@ typedef enum
 }
 
 
+
+/**
+ *  初始化中间的view
+ */
 -(void)initMiddleView
 {
     if (!m_conditionView)
@@ -188,6 +176,9 @@ typedef enum
     }
 }
 
+/**
+ *  初始化底部的view
+ */
 -(void)initBottomView
 {
     if (!m_bottomView)
@@ -203,7 +194,9 @@ typedef enum
 
 
 
-
+/**
+ *  初始化界面所有元素
+ */
 -(void)initSubView
 {
     if (self.hostView == nil)
@@ -229,16 +222,9 @@ typedef enum
         [m_topInfoView addSubview:lineView];
   
     }
-      [self initMiddleView];
+    [self initMiddleView];
     [self initBottomView];
 }
-
-
-
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning {
@@ -248,10 +234,11 @@ typedef enum
 }
 
 
-
-
-
 #pragma mark - Chart behavior
+
+/**
+ *  初始化柱状图以及配置
+ */
 -(void)initPlot {
     self.hostView.allowPinchScaling = NO;
     [self configureHost];
@@ -260,84 +247,17 @@ typedef enum
     [self configureAxes];
 }
 
--(void)reloadWithData:(NSDictionary*)TemData arrayTitle:(NSArray*)titleArray
-{
-    
-   
-    if (m_dicData)
-    {
-        [m_dicData removeAllObjects];
-    }
-    if (m_arrayTitle != titleArray)
-    {
-        [m_arrayTitle removeAllObjects];
-        [m_arrayTitle addObjectsFromArray:titleArray];
-    }
-    [m_dicData addEntriesFromDictionary:TemData];
-    [self renderHostView:nil];
-}
-
--(void)renderHostView:(NSArray*)oldData
-{
-    
-    [m_arrayData removeAllObjects];
-    if (1)
-    {
-        for (int i = 0;i < m_arrayTitle.count;i++)
-        {
-            srandom(time(NULL)+i);
-            long  value = random()%50000;
-            [m_arrayData addObject:[NSDictionary dictionaryWithObjectsAndKeys:m_arrayTitle[i],[@(value) description], nil]];
-        }
-        
-    }
-    
-
-    //  [m_topScrollView setContentSize:CGSizeMake(m_topScrollView.frame.size.width, fheight)];
-    
-    
-//    if (m_arrayData.count > 1)
-//    {
-//        
-//        self.plot.barWidth = CPTDecimalFromInteger(26);
-//    }else
-//    {
-//        CGFloat  fheight = (CPDBarWidth+CPDBarOffset)*m_arrayData.count+5;
-//        
-//        if (fheight != m_hostViewHeight)
-//        {
-//            m_hostViewHeight = fheight;
-//            [self.hostView setFrame:CGRectMake(3, 0, SCREEN_WIDTH-17, fheight)];
-//            [m_topScrollView setContentSize:CGSizeMake(m_topScrollView.frame.size.width, fheight)];
-//        }
-//        
-//        self.plot.barWidth = CPTDecimalFromInteger(32);
-//    }
-  
-    
-    //  CPTGraph *graph = self.hostView.hostedGraph;
-   
-    CGFloat xMin = 0.0f;
-    CGFloat xMax = self.hostView.frame.size.width;
-    CGFloat yMin = 0.0f;
-    CGFloat yMax = [self getMaxValueFromArray:m_arrayData];
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xMin) length:CPTDecimalFromFloat(xMax)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(yMin) length:CPTDecimalFromFloat(yMax)];
-    // [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:self.plot, nil]];
-
-    
-     [self refreshWithSortType];
-    
-}
-
+/**
+ *  初始化hostView
+ */
 -(void)configureHost
 {
     
-    CGFloat  fwidth = [UIScreen mainScreen].bounds.size.width-20;
+    CGFloat  fwidth = [UIScreen mainScreen].bounds.size.width-20-20;
     CGFloat  fsep = 5;
     CPDBarWidth = (fwidth-11*fsep)/12;
     CPDBarOffset = fsep;
-    CPDBarInitialX = CPDBarWidth/2;
+    CPDBarInitialX = 8;
     CGFloat  fYpoint = 64+30+1;
     CGFloat  fheight = [UIScreen mainScreen].bounds.size.height-fYpoint-95-180;
     
@@ -351,13 +271,14 @@ typedef enum
         
         if (m_slider == nil)
         {
-            m_slider = [[UISlider alloc] initWithFrame:CGRectMake(13, fheight-35, SCREEN_WIDTH-26, 23)];
+            m_slider = [[UISlider alloc] initWithFrame:CGRectMake(10, fheight-35, SCREEN_WIDTH-20, 23)];
             [m_slider setThumbImage:[UIImage imageNamed:@"slide_thuma.png"] forState:UIControlStateNormal];
             [m_slider setMinimumTrackTintColor:[UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1]];
             [m_slider setMaximumTrackTintColor:[UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1]];
             [m_slider setMinimumValue:0];
             [m_slider setMaximumValue:12];
             [m_slider addTarget:self action:@selector(slideValueChange:) forControlEvents:UIControlEventValueChanged];
+            //  [m_slider addTarget:self action:@selector(touchEnd:) forControlEvents:UIControlEventTouchDragExit];
             [m_topScrollView addSubview:m_slider];
         }
     }
@@ -368,67 +289,15 @@ typedef enum
     self.hostView.allowPinchScaling = NO;
     self.hostView.layer.borderColor = [UIColor clearColor].CGColor;
     [m_topScrollView addSubview:self.hostView];
-
+    
     
     
 }
 
 
--(void)setSliderIndex:(CGFloat)index
-{
-    // CGFloat  fmax = m_slider.maximumValue;
-    //  CGFloat fsep = 0.5;
-    
-    CGFloat fwidth =  CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*index-CPDBarWidth/2;
-    CGFloat  fvalue =  fwidth/m_slider.frame.size.width*12;
-    
-    [m_slider setValue:fvalue animated:YES];
-}
-
--(void)slideValueChange:(UISlider*)myslider
-{
-    CGFloat  fvalue = myslider.value;
-    NSInteger  index = fvalue;
-    CGFloat fsep = 0.5;
-    if (index < 6)
-    {
-        fsep = 0.25;
-    }
-    if (index == 0)
-    {
-        [self barWasSelectedAtRecordIndex:0 isSlider:YES];
-    }else
-    {
-        [self barWasSelectedAtRecordIndex:index isSlider:YES];
-    }
-    
-    // [self barWasSelectedAtRecordIndex:fvalue];
-    
-#if DEBUG
-    NSLog(@"slideValueChange:%f",fvalue);
-#endif
-}
-
--(CGFloat)getMaxValueFromArray:(NSArray*)array
-{
- 
-    CGFloat fmax = 0;
-    for (id info in array)
-    {
-        if ([info isKindOfClass:[NSDictionary class]])
-        {
-            double  temp = [[[info allKeys] firstObject] doubleValue];
-            if (fmax < temp)
-            {
-                fmax = temp;
-            }
-           
-        }
-    }
-    return fmax;
-}
-
-
+/**
+ *  配置graph
+ */
 -(void)configureGraph {
     // 1 - Create the graph
     CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
@@ -439,9 +308,9 @@ typedef enum
     self.hostView.hostedGraph = graph;
     
     self.hostView.backgroundColor = [UIColor clearColor];
-
+    
     // graph.plotAreaFrame.borderColor = [UIColor clearColor].CGColor;
-  
+    
     //graph.plotAreaFrame.plotArea.fill = [CPTFill fillWithColor:[CPTColor redColor]];
     // 2 - Configure the graph
     
@@ -453,26 +322,30 @@ typedef enum
     graph.paddingRight  = 10.0f;
     
     
-
+    
     graph.fill = [CPTFill fillWithColor:[CPTColor clearColor]];
     graph.plotAreaFrame.fill = [CPTFill fillWithColor:[CPTColor clearColor]];
     graph.plotAreaFrame.plotArea.fill = [CPTFill fillWithColor:[CPTColor clearColor]];
-
+    
     
     // 5 - Set up plot space
     CGFloat xMin = 0.0f;
-    CGFloat xMax =  self.hostView.frame.size.width;
+    CGFloat xMax =  self.hostView.frame.size.width-graph.paddingLeft-graph.paddingRight;
     CGFloat yMin = 0.0f;
     CGFloat yMax = 10000;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xMin) length:CPTDecimalFromFloat(xMax)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(yMin) length:CPTDecimalFromFloat(yMax)];
 }
 
+
+/**
+ *  配置barplot
+ */
 -(void)configurePlots {
     // 1 - Set up the three plots
     self.plot = [CPTBarPlot tubularBarPlotWithColor:[CPTColor redColor] horizontalBars:YES];
     self.plot.identifier = @"aaplPlot";
-
+    
     // 2 - Set up line style
     CPTMutableLineStyle *barLineStyle = [[CPTMutableLineStyle alloc] init];
     barLineStyle.lineColor = [CPTColor clearColor];
@@ -493,6 +366,10 @@ typedef enum
     
 }
 
+
+/**
+ *  配置坐标轴
+ */
 -(void)configureAxes {
     // 1 - Configure styles
     
@@ -504,7 +381,7 @@ typedef enum
     axisTitleStyle.color = [CPTColor lightGrayColor];
     axisTitleStyle.fontName = @"Helvetica";
     axisTitleStyle.fontSize = 11.0f;
-
+    
     // 2 - Get the graph's axis set
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostView.hostedGraph.axisSet;
     // 3 - Configure the x-axis
@@ -513,65 +390,166 @@ typedef enum
     axisSet.xAxis.titleTextStyle = axisTitleStyle;
     axisSet.xAxis.titleOffset = 10.0f;
     axisSet.xAxis.axisLineStyle = axisLineStyle;
-   
+    
     plotSpace.delegate = self;
     // 4 - Configure the y-axi
     CPTAxisTitle  *labelTitle = [[CPTAxisTitle alloc] initWithText:@"单位:W" textStyle:axisTitleStyle];
     axisSet.yAxis.axisTitle = labelTitle;
-    axisSet.yAxis.titleOffset = -self.hostView.frame.size.width-0;
+    axisSet.yAxis.titleOffset = -self.hostView.frame.size.width+3;
     axisSet.yAxis.titleRotation = M_PI+M_PI_2;
     axisSet.yAxis.titleLocation = CPTDecimalFromFloat(25000);
     axisSet.yAxis.axisLineStyle = axisLineStyle;
-    
-    
-
 }
 
 
-
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
-}
-
-
-#pragma mark - CPTPlotDataSource methods
-
--(double)getMoneyAccordIndx:(NSUInteger)index
-{    
-    return [[[m_arrayData[index] allKeys] firstObject] doubleValue];
-}
--(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
-    return m_arrayData.count;
-}
-
-
--(double)doubleForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
+/**
+ *  重载数据，刷新数据图
+ *
+ *  @param TemData    数据
+ *  @param titleArray X轴数据
+ */
+-(void)reloadWithData:(NSDictionary*)TemData arrayTitle:(NSArray*)titleArray
 {
     
-    if (fieldEnum == CPTBarPlotFieldBarTip) {
-        if (m_barType == EPCenterBarTypeNumber || m_barType == EPCenterBarTypeSelectNumber)
-        {
-            return 0;
-        }
-        return [self getMoneyAccordIndx:index];
-    }else if (fieldEnum == CPTBarPlotFieldBarLocation)
+   
+    if (m_dicData)
     {
-        
-        if (m_arrayData.count == 1)
-        {
-            return CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*index+4;
-        }
-        if (m_barType == EPCenterBarTypeSelectNumber || m_barType == EPCenterBarTypeNumber)
-        {
-          return  CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*index-1.5;
-        }
-        return CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*index;
+        [m_dicData removeAllObjects];
     }
-    return index;
+    if (m_arrayTitle != titleArray)
+    {
+        [m_arrayTitle removeAllObjects];
+        [m_arrayTitle addObjectsFromArray:titleArray];
+    }
+    [m_dicData addEntriesFromDictionary:TemData];
+    [self renderHostView];
+}
+
+
+/**
+ *  根据配置数据  显示图形
+ */
+-(void)renderHostView
+{
+    
+    [m_arrayData removeAllObjects];
+    if (1)
+    {
+        for (int i = 0;i < m_arrayTitle.count;i++)
+        {
+            srandom(time(NULL)+i);
+            long  value = random()%50000;
+            [m_arrayData addObject:[NSDictionary dictionaryWithObjectsAndKeys:m_arrayTitle[i],[@(value) description], nil]];
+        }
+        
+    }
+    
+    CGFloat yMin = 0.0f;
+    CGFloat yMax = [self getMaxValueFromArray:m_arrayData];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(yMin) length:CPTDecimalFromFloat(yMax)];
+     [self refreshWithSortType];
     
 }
 
 
+/**
+ *  根据 index 显示设置slider值
+ *
+ *  @param index index
+ */
+-(void)setSliderIndex:(CGFloat)index
+{
+    // CGFloat  fmax = m_slider.maximumValue;
+    //  CGFloat fsep = 0.5;
+    // CGFloat ;
+    // CGFloat fwidth =  CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*index+CPDBarWidth/2;
+    CGFloat  fvalue =  0.5+index;
+    
+    [m_slider setValue:fvalue animated:YES];
+}
+
+
+-(void)touchEnd:(id)sender
+{
+    
+}
+
+
+/**
+ *  根据slider滑动改变bar的选择范围
+ *
+ *  @param myslider slider
+ */
+-(void)slideValueChange:(UISlider*)myslider
+{
+    CGFloat  fvalue = myslider.value;
+    NSInteger  index = fvalue;
+    // CGFloat fsep = 0.5;
+
+    if (index == 0)
+    {
+        [self barWasSelectedAtRecordIndex:0 isSlider:YES];
+    }else
+    {
+        [self barWasSelectedAtRecordIndex:index isSlider:YES];
+    }
+    
+    // [self barWasSelectedAtRecordIndex:fvalue];
+    
+#if DEBUG
+    NSLog(@"slideValueChange:%f",myslider.value);
+#endif
+}
+
+/**
+ *  获取array数据中得最大值
+ *
+ *  @param array 数据
+ *
+ *  @return 最大值
+ */
+-(CGFloat)getMaxValueFromArray:(NSArray*)array
+{
+ 
+    return 50000;
+    /*
+    CGFloat fmax = 0;
+    for (id info in array)
+    {
+        if ([info isKindOfClass:[NSDictionary class]])
+        {
+            double  temp = [[[info allKeys] firstObject] doubleValue];
+            if (fmax < temp)
+            {
+                fmax = temp;
+            }
+           
+        }
+    }*/
+    // return fmax;
+}
+
+
+/**
+ *  根据index获取值
+ *
+ *  @param index index
+ *
+ *  @return index的值
+ */
+-(double)getMoneyAccordIndx:(NSUInteger)index
+{
+    return [[[m_arrayData[index] allKeys] firstObject] doubleValue];
+}
+
+/**
+ *  获取重用的CPTTextLayer
+ *
+ *  @param isHighted 是否hightlighted
+ *  @param index     index
+ *
+ *  @return CPTTextLayer
+ */
 -(CPTTextLayer*)getLayisHight:(BOOL)isHighted index:(NSInteger)index
 {
     if (!m_dicReuseLabel)
@@ -608,11 +586,40 @@ typedef enum
     {
         layer.textStyle = textStyleN;
     }
-
+    
     return layer;
     
 }
+#pragma mark - CPTPlotDataSource methods
+-(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
+    return m_arrayData.count;
+}
 
+-(double)doubleForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
+{
+    
+    if (fieldEnum == CPTBarPlotFieldBarTip) {
+        if (m_barType == EPCenterBarTypeNumber || m_barType == EPCenterBarTypeSelectNumber)
+        {
+            return 0;
+        }
+        return [self getMoneyAccordIndx:index];
+    }else if (fieldEnum == CPTBarPlotFieldBarLocation)
+    {
+        
+        if (m_arrayData.count == 1)
+        {
+            return CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*index+4;
+        }
+        if (m_barType == EPCenterBarTypeSelectNumber || m_barType == EPCenterBarTypeNumber)
+        {
+          return  CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*index-1.5;
+        }
+        return CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*index;
+    }
+    return index;
+    
+}
 - (CPTLayer *)dataLabelForPlot:(CPTPlot *) plot recordIndex: (NSUInteger) index{
     
     if (m_barType == EPCenterBarTypeSelectBar || m_barType == EPCenterBarTypeDefault)
@@ -733,11 +740,6 @@ typedef enum
     
 }
 
-
--(NSString *)legendTitleForBarPlot:(CPTBarPlot *)barPlot recordIndex:(NSUInteger)index
-{
-    return @"231454";
-}
 -(void)barPlot:(CPTBarPlot *)plot barWasSelectedAtRecordIndex:(NSUInteger)index
 {
     [self barWasSelectedAtRecordIndex:index isSlider:NO];
@@ -795,6 +797,8 @@ typedef enum
     
     return YES;
 }*/
+
+
 
 -(void)singleTap:(NSDictionary*)dicInfo
 {
@@ -861,7 +865,15 @@ typedef enum
 
 
 
-#pragma mark buildLabel
+
+/**
+ *  按照长度截取字符
+ *
+ *  @param allString 字符
+ *  @param length    攫取长度
+ *
+ *  @return 截取后的字符
+ */
 -(NSString*)getSusString:(NSString*)allString lengthSave:(NSInteger)length
 {
     if ([allString length] < length/2)
@@ -900,6 +912,17 @@ typedef enum
 
 
 
+#pragma mark buildLabel
+
+/**
+ *  按照key和text值生成并配置label
+ *
+ *  @param isHighted 是否高亮
+ *  @param key       key
+ *  @param text      text
+ *
+ *  @return CPTAxisLabel
+ */
 -(CPTAxisLabel*)getLabelisHight:(BOOL)isHighted key:(NSNumber*)key text:(NSString*)text
 {
     if (!m_dicReuseLabel)
@@ -952,6 +975,12 @@ typedef enum
     
 }
 
+
+/**
+ *  X轴下方显示label
+ *
+ *  @return NSMutableSet
+ */
 - (NSMutableSet*)buildLabelTitle
 {
     NSMutableSet *newAxisLabels = [NSMutableSet set];
@@ -978,7 +1007,7 @@ typedef enum
        
         if (i == m_arrayData.count)
         {
-            newLabel.tickLocation = CPTDecimalFromInteger(CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*(i-1)+11);
+            newLabel.tickLocation = CPTDecimalFromInteger(CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*(i-1)+10);
         }else
         {
             newLabel.tickLocation = CPTDecimalFromInteger(CPDBarInitialX+(CPDBarWidth+CPDBarOffset)*(i-1)+15);
@@ -992,36 +1021,10 @@ typedef enum
 }
 
 
-- (NSMutableSet*)buildyLabelTitle
-{
-    
-    NSMutableSet *newAxisLabels = [NSMutableSet set];
 
-    double max = [self getMaxValueFromArray:m_arrayData];
-    NSArray *arrayYValues = [NSArray arrayWithObjects:@"1",@"2",@"3",@"4", nil];
-    
-
-    for ( NSInteger i = 0; i < arrayYValues.count; i++)
-    {
-        
-       
-        NSString  *strText =  arrayYValues[i];
-        
-    
-        CPTAxisLabel *newLabel = [self getLabelisHight:NO key:@(i-1+3000) text:strText];
-    
-        
-        newLabel.tickLocation = CPTDecimalFromInteger(max/4*(i+1));
-        
-        [newAxisLabels addObject:newLabel];
-    }
-    
-    return newAxisLabels;
-}
 
 
 #pragma mark getDataAccordCondition
-
 -(NSString*)getTotalDataByCondition:(NSDictionary*)dicInfo mainType:(EPStaticType)maintype bottomType:(EPStaticType)bottomType mainKeyID:(id)mainKeyID bottomID:(id)bottomKeyID
 {
     
@@ -1034,47 +1037,12 @@ typedef enum
     
 }
 
-#pragma mark EPReportDataChoiceViewDelegate
--(void)needChangeData:(NSDictionary*)dicInfo staticType:(EPStaticType)type
-{
-    
-    m_bottomType = type;
-    self.dicFilter = dicInfo;
-    NSDictionary  *dicTemp = [self getAllDataByCondition:dicInfo mainType:m_centerType bottomType:type];
-    [self reloadWithData:dicTemp arrayTitle:m_arrayTitle];
-    [m_topInfoView refreshWithdicData:[self getTopInfoForShow]];
 
-}
--(NSDictionary*)getAllDataByCondition:(NSDictionary*)dicInfo mainType:(EPStaticType)maintype bottomType:(EPStaticType)bottomType
-{
-    
-
-    self.changeItem = nil;
-    NSDictionary  *dicTemp = nil;
-#if DEBUG
-     NSLog(@"getAllDataByCondition:%@",dicTemp);
-#endif
-    [m_topInfoView refreshWithdicData:[self getTopInfoForShow]];
-    return dicTemp;
-    
-    
-}
--(void)selectData:(NSDictionary*)dicInfo staticType:(EPStaticType)type otherInfo:(id)infokey
-{
-    
- 
-    m_barType = EPCenterBarTypeDefault;
-    self.selectItemDic = nil;
-    self.changeItem = [infokey description];
-    [self renderHostView:nil];
-    [m_topInfoView refreshWithdicData:[self getTopInfoForShow]];
-    
-    // NSTimeInterval  timeI = [[NSDate date] timeIntervalSinceDate:date];
-    // NSLog(@"timeI:%f",timeI);
-}
-
-
-
+/**
+ *  获取 上方显示所需要的数据
+ *
+ *  @return NSDictionary
+ */
 -(NSDictionary*)getTopInfoForShow
 {
 
@@ -1110,8 +1078,10 @@ typedef enum
 }
 
 
-
--(void)setGirdLine
+/**
+ *  设置网格和Y轴显示数据
+ */
+-(void)setGirdLineAndYLabels
 {
     
     CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
@@ -1143,31 +1113,13 @@ typedef enum
     
     
     
-//    CPTTextLayer  *label = nil;
-//    CPTMutableTextStyle *textStyle = nil;
-//    if (textStyle == nil)
-//    {
-//        textStyle = [CPTMutableTextStyle textStyle];
-//        textStyle.color = [BAColorHelper stringRGBToCPTColor:@"193193193" alpha:@"1"];
-//        textStyle.fontSize = 16;
-//    }
-//    
-//    
-//    if (label == nil)
-//    {
-//        label = [[CPTTextLayer alloc] initWithText:@"2" style:textStyle];
-//        [label setFrame:CGRectMake(0, 40, 20, 21)];
-//    }
-//    [self.hostView.hostedGraph addSublayer:label];
-//    self.hostView.hostedGraph.masksToBorder = NO;
-    
     CGFloat  fsep = (m_topScrollView.frame.size.height-30)/6;
     CGFloat  fypoint = 0;
     for (int i = 5; i > 0; i--)
     {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, fypoint-5, 15, 21)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, fypoint-2, 15, 21)];
         [label setBackgroundColor:[UIColor clearColor]];
-        [label setTextColor:[UIColor colorWithRed:193/255.0 green:193/255.0  blue:193/255.0  alpha:1]];
+        [label setTextColor:[UIColor colorWithRed:80/255.0 green:80/255.0  blue:80/255.0  alpha:1]];
         [label setText:[NSString stringWithFormat:@"%d",i]];
         [label setTextAlignment:NSTextAlignmentRight];
         [label setFont:[UIFont systemFontOfSize:14]];
@@ -1180,15 +1132,15 @@ typedef enum
 }
 
 #pragma mark JFDimensionSortControllerDelegate
+/**
+ *  按照排序类型对本地数据进行排序
+ */
 -(void)refreshWithSortType
 {
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostView.hostedGraph.axisSet;
     axisSet.xAxis.axisLabels = [self buildLabelTitle];
-    [self setGirdLine];
+    [self setGirdLineAndYLabels];
     axisSet.xAxis.labelingPolicy  = CPTAxisLabelingPolicyNone;
-    //axisSet.yAxis.labelingPolicy  = CPTAxisLabelingPolicyNone;
-    // axisSet.yAxis.axisLabels = [self buildyLabelTitle];
-    
     BAAnimationHelper *animation=[[BAAnimationHelper alloc]init];
     [animation plotStartAnimation:nil sourceData:nil plot:self.plot graph:self.hostView.hostedGraph];
     [self.hostView.hostedGraph reloadDataIfNeeded];
@@ -1200,7 +1152,7 @@ typedef enum
 -(void)userDidChooseCondition:(NSDictionary*)dicInfo type:(EPStaticType)conditionType
 {
     self.selectItemDic = nil;
-    [self renderHostView:nil];
+    [self renderHostView];
 #if DEBUG
     NSLog(@"userDidChooseCondition:%@ type:%d",dicInfo,conditionType);
 #endif
@@ -1210,7 +1162,7 @@ typedef enum
 -(void)scrollToBottomDic:(NSDictionary*)dicInfo
 {
     self.selectItemDic = nil;
-    [self renderHostView:nil];
+    [self renderHostView];
 }
 
 

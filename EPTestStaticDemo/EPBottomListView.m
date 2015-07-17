@@ -15,12 +15,12 @@
     __weak  IBOutlet UITableView     *m_tableView;
     __weak  IBOutlet UIView          *m_headView;
     __weak  IBOutlet UIView          *m_alphaView;
-    __weak  IBOutlet UILabel          *m_labelFirstTitle;
-     __weak  IBOutlet UILabel          *m_labelSecondTitle;
+    __weak  IBOutlet UILabel         *m_labelFirstTitle;
+    __weak  IBOutlet UILabel         *m_labelSecondTitle;
     
-    NSMutableArray  *m_arrayData;
-    NSInteger       m_currentIndex;
-    NSInteger         m_cellHeight;
+    NSMutableArray                  *m_arrayData;
+    NSInteger                       m_currentIndex;
+    NSInteger                       m_cellHeight;
 }
 @end
 @implementation EPBottomListView
@@ -140,17 +140,7 @@
         [cell.labelContent setTextColor:[UIColor colorWithRed:179/255.0 green:228/255.0 blue:31/255.0 alpha:1]];
     }
     
-    
-//    if (indexPath.row %2 == 0)
-//    {
-//        [cell setBackgroundColor:[UIColor whiteColor]];
-//    }else
-//    {
-//        [cell setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
-//    }
-    
-
-    
+        
     return cell;
 }
 

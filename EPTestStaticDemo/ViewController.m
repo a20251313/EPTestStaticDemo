@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "EPStaticCenterViewController.h"
+#import "EPStaticBarViewController.h"
 @interface ViewController ()
 
 @end
@@ -31,7 +31,7 @@
 
 -(void)clickButton:(id)sender
 {
-    EPStaticCenterViewController  *center = [[EPStaticCenterViewController alloc] init];
+    EPStaticBarViewController  *center = [[EPStaticBarViewController alloc] init];
     [self.navigationController pushViewController:center animated:YES];
 }
 

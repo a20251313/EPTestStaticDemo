@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EPRootViewController.h"
 #import "EPAllEnum.h"
-@interface EPStaticCenterViewController : EPRootViewController
+@interface EPStaticBarViewController : EPRootViewController
 
 @property(nonatomic)EPStaticType    middleType;
 

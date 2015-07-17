@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CorePlot-CocoaTouch.h"
 @interface BAColorHelper : NSObject
-+ (CPTColor *)stringToCPTColor:(NSString *)color alpha:(NSString *)alpha;
++(CPTColor *)stringToCPTColor:(NSString *)color alpha:(NSString *)alpha;
 +(UIColor *)stringToUIColor:(NSString *)color alpha:(NSString *)alpha;
 +(CPTColor *)stringRGBToCPTColor:(NSString *)color alpha:(NSString *)alpha;
 +(UIColor *)stringRGBToUIColor:(NSString *)color alpha:(NSString *)alpha;

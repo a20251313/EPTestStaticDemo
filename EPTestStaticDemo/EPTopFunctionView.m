@@ -13,7 +13,7 @@
 @interface EPTopFunctionView ()
 {
     __weak  IBOutlet   UILabel  *labelLeft;
-    __weak  IBOutlet   UILabel  *labelBotttomRight;
+    __weak  IBOutlet   UILabel  *labelRight;
 }
 
 @property(nonatomic,strong)NSDictionary *dicData;
@@ -22,13 +22,7 @@
 @implementation EPTopFunctionView
 
 @synthesize dicData;
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 -(void)animationWithScale:(CGFloat)scale durtion:(double)durtion
 {
@@ -56,10 +50,8 @@
 {
     if (dicTemp)
     {
-     
-        [labelBotttomRight setText:[NSString stringWithFormat:@"%@",[dicTemp objectForKey:@"money"]]];
+        [labelRight setText:[NSString stringWithFormat:@"%@",[dicTemp objectForKey:@"money"]]];
         [labelLeft setText:[dicTemp objectForKey:@"item"]];
-        
     }
     self.dicData = dicTemp;
     
@@ -74,10 +66,6 @@
     CGSize size = [UIScreen mainScreen].bounds.size;
     [self setBounds:CGRectMake(0, 0, size.width, 30)];
     [self layoutIfNeeded];
-    /*
-    UITapGestureRecognizer  *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickSelfAction:)];
-    [self addGestureRecognizer:tap];*/
-    
 }
 
 

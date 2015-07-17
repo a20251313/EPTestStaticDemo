@@ -20,7 +20,7 @@
 		0E5701621B53B6FB00E808F9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5701601B53B6FB00E808F9 /* LaunchScreen.xib */; };
 		0E57016E1B53B6FB00E808F9 /* EPTestStaticDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E57016D1B53B6FB00E808F9 /* EPTestStaticDemoTests.m */; };
 		0E5701C61B53B82100E808F9 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E5701C51B53B82100E808F9 /* libCorePlot-CocoaTouch.a */; };
-		0E5701C91B53B8ED00E808F9 /* EPStaticCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701C81B53B8ED00E808F9 /* EPStaticCenterViewController.m */; };
+		0E5701C91B53B8ED00E808F9 /* EPStaticBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701C81B53B8ED00E808F9 /* EPStaticBarViewController.m */; };
 		0E5701CF1B53B90900E808F9 /* EPConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701CB1B53B90900E808F9 /* EPConditionView.m */; };
 		0E5701D01B53B90900E808F9 /* EPConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5701CD1B53B90900E808F9 /* EPConditionCell.m */; };
 		0E5701D11B53B90900E808F9 /* EPConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5701CE1B53B90900E808F9 /* EPConditionCell.xib */; };
@@ -143,8 +143,8 @@
 		0E5701C31B53B79200E808F9 /* CPTXYPlotSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYPlotSpace.h; sourceTree = "<group>"; };
 		0E5701C41B53B79200E808F9 /* NSCoderExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoderExtensions.h; sourceTree = "<group>"; };
 		0E5701C51B53B82100E808F9 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
-		0E5701C71B53B8ED00E808F9 /* EPStaticCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPStaticCenterViewController.h; sourceTree = "<group>"; };
-		0E5701C81B53B8ED00E808F9 /* EPStaticCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPStaticCenterViewController.m; sourceTree = "<group>"; };
+		0E5701C71B53B8ED00E808F9 /* EPStaticBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPStaticBarViewController.h; sourceTree = "<group>"; };
+		0E5701C81B53B8ED00E808F9 /* EPStaticBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPStaticBarViewController.m; sourceTree = "<group>"; };
 		0E5701CA1B53B90900E808F9 /* EPConditionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPConditionView.h; sourceTree = "<group>"; };
 		0E5701CB1B53B90900E808F9 /* EPConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPConditionView.m; sourceTree = "<group>"; };
 		0E5701CC1B53B90900E808F9 /* EPConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPConditionCell.h; sourceTree = "<group>"; };
@@ -224,20 +224,20 @@
 				0E5701D21B53B91600E808F9 /* BFUtils.h */,
 				0E5701D51B53B96F00E808F9 /* EPAllEnum.h */,
 				0E5701D31B53B91600E808F9 /* BFUtils.m */,
-				0E5701C71B53B8ED00E808F9 /* EPStaticCenterViewController.h */,
-				0E5701C81B53B8ED00E808F9 /* EPStaticCenterViewController.m */,
+				0E5701C71B53B8ED00E808F9 /* EPStaticBarViewController.h */,
+				0E5701C81B53B8ED00E808F9 /* EPStaticBarViewController.m */,
 				0E5701CA1B53B90900E808F9 /* EPConditionView.h */,
 				0E5701CB1B53B90900E808F9 /* EPConditionView.m */,
 				0E5701CC1B53B90900E808F9 /* EPConditionCell.h */,
 				0E5701CD1B53B90900E808F9 /* EPConditionCell.m */,
 				0E5701CE1B53B90900E808F9 /* EPConditionCell.xib */,
-				0E5701581B53B6FB00E808F9 /* ViewController.h */,
 				0EB50E461B54D3430057013E /* EPBottomListView.h */,
 				0EB50E471B54D3430057013E /* EPBottomListView.m */,
 				0EB50E491B54D3540057013E /* EPBottomListView.xib */,
 				0EB50E4B1B54DE0E0057013E /* EPBottomCell.h */,
 				0EB50E4C1B54DE0E0057013E /* EPBottomCell.m */,
 				0EB50E4D1B54DE0E0057013E /* EPBottomCell.xib */,
+				0E5701581B53B6FB00E808F9 /* ViewController.h */,
 				0E5701591B53B6FB00E808F9 /* ViewController.m */,
 				0E0FC0081B560C2C00213C80 /* slide_thuma.png */,
 				0E0FC00A1B56248D00213C80 /* 1.png */,
@@ -481,7 +481,7 @@
 				0E5701D41B53B91600E808F9 /* BFUtils.m in Sources */,
 				0E5701571B53B6FB00E808F9 /* AppDelegate.m in Sources */,
 				0E5701D01B53B90900E808F9 /* EPConditionCell.m in Sources */,
-				0E5701C91B53B8ED00E808F9 /* EPStaticCenterViewController.m in Sources */,
+				0E5701C91B53B8ED00E808F9 /* EPStaticBarViewController.m in Sources */,
 				0E5701DD1B53BBF000E808F9 /* BAColorHelper.m in Sources */,
 				0E5701CF1B53B90900E808F9 /* EPConditionView.m in Sources */,
 				0EB50E4E1B54DE0E0057013E /* EPBottomCell.m in Sources */,
