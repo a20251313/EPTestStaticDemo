@@ -17,6 +17,7 @@
     __weak  IBOutlet UIView          *m_alphaView;
     __weak  IBOutlet UILabel         *m_labelFirstTitle;
     __weak  IBOutlet UILabel         *m_labelSecondTitle;
+    __weak  IBOutlet UILabel         *m_labelLevel;
     
     NSMutableArray                  *m_arrayData;
     NSInteger                       m_currentIndex;
@@ -56,11 +57,19 @@
 {
     m_currentIndex = 0;
     m_cellHeight = 44;
+    m_labelLevel.layer.masksToBounds = YES;
+    m_labelLevel.layer.cornerRadius = 5;
+    m_labelLevel.layer.borderWidth = 1;
+    m_labelLevel.layer.borderColor = [UIColor colorWithRed:179/255.0 green:228/255.0 blue:31/255.0 alpha:1].CGColor;
     [self addData];
     [self initAlphaView];
     [m_tableView reloadData];
 }
 
+
+/**
+ *  增加各个不透明度块
+ */
 -(void)initAlphaView
 {
     
@@ -94,9 +103,6 @@
     UIView  *rightView = [[UIView alloc] initWithFrame:CGRectMake(size.width-10,0,10, 44)];
     [rightView setBackgroundColor:[UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0 alpha:1]];
     [m_alphaView addSubview:rightView];
-    
-    
-    
     
 }
 

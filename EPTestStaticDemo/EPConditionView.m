@@ -143,6 +143,7 @@
         [delegate userDidChooseCondition:dicInfo type:self.staticType];
     }
     [collectionView reloadData];
+    
 }
 
 

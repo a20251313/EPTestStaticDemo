@@ -226,8 +226,8 @@
 				0E5701551B53B6FB00E808F9 /* AppDelegate.h */,
 				0E5701561B53B6FB00E808F9 /* AppDelegate.m */,
 				0E5701D21B53B91600E808F9 /* BFUtils.h */,
-				0E5701D51B53B96F00E808F9 /* EPAllEnum.h */,
 				0E5701D31B53B91600E808F9 /* BFUtils.m */,
+				0E5701D51B53B96F00E808F9 /* EPAllEnum.h */,
 				0E5701C71B53B8ED00E808F9 /* EPStaticBarViewController.h */,
 				0E5701C81B53B8ED00E808F9 /* EPStaticBarViewController.m */,
 				0E5701CA1B53B90900E808F9 /* EPConditionView.h */,
@@ -620,6 +620,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = EPTestStaticDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -640,6 +641,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = EPTestStaticDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

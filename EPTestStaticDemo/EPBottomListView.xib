@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F6a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
@@ -21,11 +22,17 @@
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="部门名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iu3-zM-N4g">
                             <rect key="frame" x="0.0" y="5" width="160" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="sOn-us-vK0"/>
-                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="层次" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vrc-bA-E5n">
+                            <rect key="frame" x="10" y="5" width="30" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="Q4S-LX-Xg7"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.70196078429999997" green="0.89411764709999997" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -37,10 +44,13 @@
                         <constraint firstItem="UAW-43-EPC" firstAttribute="width" secondItem="Iu3-zM-N4g" secondAttribute="width" id="JaA-Ve-5vG"/>
                         <constraint firstAttribute="bottom" secondItem="Iu3-zM-N4g" secondAttribute="bottom" constant="4" id="RaJ-ZZ-Hle"/>
                         <constraint firstAttribute="trailing" secondItem="UAW-43-EPC" secondAttribute="trailing" id="Rok-p2-E52"/>
+                        <constraint firstItem="Vrc-bA-E5n" firstAttribute="leading" secondItem="pOg-Q6-EKT" secondAttribute="leading" constant="10" id="cfZ-D0-rCB"/>
                         <constraint firstAttribute="bottom" secondItem="UAW-43-EPC" secondAttribute="bottom" constant="4" id="gLd-Gr-fpX"/>
                         <constraint firstItem="Iu3-zM-N4g" firstAttribute="top" secondItem="pOg-Q6-EKT" secondAttribute="top" constant="5" id="gu2-jb-37S"/>
                         <constraint firstItem="UAW-43-EPC" firstAttribute="leading" secondItem="Iu3-zM-N4g" secondAttribute="trailing" id="opY-wf-92p"/>
+                        <constraint firstAttribute="bottom" secondItem="Vrc-bA-E5n" secondAttribute="bottom" constant="4" id="pFP-E4-hWL"/>
                         <constraint firstAttribute="height" constant="30" id="qtJ-fk-HS8"/>
+                        <constraint firstItem="Vrc-bA-E5n" firstAttribute="top" secondItem="pOg-Q6-EKT" secondAttribute="top" constant="5" id="zzl-ro-bY6"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZeS-Mz-OWu">
@@ -78,6 +88,7 @@
                 <outlet property="m_alphaView" destination="Lvy-pf-vyb" id="iwG-mB-mfK"/>
                 <outlet property="m_headView" destination="pOg-Q6-EKT" id="i3C-rB-XdF"/>
                 <outlet property="m_labelFirstTitle" destination="Iu3-zM-N4g" id="mhn-U2-4Jv"/>
+                <outlet property="m_labelLevel" destination="Vrc-bA-E5n" id="0TN-ed-NpX"/>
                 <outlet property="m_labelSecondTitle" destination="UAW-43-EPC" id="O7Y-4K-FL7"/>
                 <outlet property="m_tableView" destination="ZeS-Mz-OWu" id="QxS-67-hdz"/>
             </connections>
