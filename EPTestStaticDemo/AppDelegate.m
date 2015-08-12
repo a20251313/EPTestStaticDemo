@@ -16,7 +16,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point 235 for customization after application launch.
+    // poiuny3445676
     return YES;
 }
 
